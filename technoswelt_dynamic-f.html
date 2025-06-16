@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technoswelt - Mein Technikgeschäft</title>
+    <!-- Підключення шрифту Inter з Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- ПОЧАТОК: Реєстрація анімованих CSS-змінних для кольорів --- */
+
+        /* Ми реєструємо кожну змінну кольору за допомогою @property.
+           Це дозволяє браузеру плавно анімувати переходи між кольорами. */
+
+        /* Прохолодна Палітра (початкові значення) */
+        @property --s1-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(255,20,147,0.8); }
+        @property --s1-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(138,43,226,0.6); }
+        @property --s1-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(75,0,130,0.3); }
+        @property --s1-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(255,20,147,0.5); }
+        @property --s1-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(138,43,226,0.3); }
+        @property --s1-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(75,0,130,0.2); }
+
+        @property --s2-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(0,255,127,0.7); }
+        @property --s2-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(32,178,170,0.5); }
+        @property --s2-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(0,139,139,0.3); }
+        @property --s2-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(0,255,127,0.4); }
+        @property --s2-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(32,178,170,0.3); }
+        @property --s2-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(0,139,139,0.15); }
+
+        @property --s3-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(255,165,0,0.8); }
+        @property --s3-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(255,69,0,0.6); }
+        @property --s3-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(220,20,60,0.3); }
+        @property --s3-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(255,165,0,0.6); }
+        @property --s3-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(255,69,0,0.4); }
+        @property --s3-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(220,20,60,0.2); }
+
+        @property --s4-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(64,224,208,0.7); }
+        @property --s4-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(0,206,209,0.5); }
+        @property --s4-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(25,25,112,0.3); }
+        @property --s4-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(64,224,208,0.5); }
+        @property --s4-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(0,206,209,0.3); }
+        @property --s4-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(25,25,112,0.15); }
+
+        @property --s5-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(186,85,211,0.8); }
+        @property --s5-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(147,112,219,0.6); }
+        @property --s5-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(138,43,226,0.4); }
+        @property --s5-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(186,85,211,0.6); }
+        @property --s5-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(147,112,219,0.4); }
+        @property --s5-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(138,43,226,0.2); }
+
+        @property --s6-grad-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(0,191,255,0.8); }
+        @property --s6-grad-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(30,144,255,0.6); }
+        @property --s6-grad-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(65,105,225,0.3); }
+        @property --s6-shadow-c1 { syntax: '<color>'; inherits: true; initial-value: rgba(0,191,255,0.6); }
+        @property --s6-shadow-c2 { syntax: '<color>'; inherits: true; initial-value: rgba(30,144,255,0.4); }
+        @property --s6-shadow-c3 { syntax: '<color>'; inherits: true; initial-value: rgba(65,105,225,0.2); }
+        /* --- КІНЕЦЬ: Реєстрація анімованих CSS-змінних --- */
+
+        /* Загальні стилі та фон */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #050505 20%, #0a0a0a 40%, #101010 60%, #151515 80%, #1a1a1a 100%);
+            background-size: 400% 400%;
+            /* Додаємо нову анімацію paletteCycle до існуючих */
+            animation:
+                gradientShift 20s ease infinite,
+                paletteCycle 25s ease-in-out infinite;
+            overflow: hidden;
+            position: relative;
+            color: #ffffff;
+        }
+
+        /* Анімація градієнта */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- ПОЧАТОК: Нова анімація для зміни кольорової палітри --- */
+        @keyframes paletteCycle {
+            /* 0% та 100% - це прохолодна палітра (встановлена в initial-value) */
+            /* 50% - це тепла палітра, до якої буде плавний перехід */
+            50% {
+                /* Тепла палітра (відтінки вогню, заходу сонця) */
+                --s1-grad-c1: rgba(255,99,71,0.8);    /* Tomato */
+                --s1-grad-c2: rgba(255,69,0,0.6);     /* OrangeRed */
+                --s1-grad-c3: rgba(220,20,60,0.3);    /* Crimson */
+                --s1-shadow-c1: rgba(255,99,71,0.5);
+                --s1-shadow-c2: rgba(255,69,0,0.3);
+                --s1-shadow-c3: rgba(220,20,60,0.2);
+
+                --s2-grad-c1: rgba(255,215,0,0.7);    /* Gold */
+                --s2-grad-c2: rgba(218,165,32,0.5);   /* Goldenrod */
+                --s2-grad-c3: rgba(184,134,11,0.3);   /* DarkGoldenrod */
+                --s2-shadow-c1: rgba(255,215,0,0.4);
+                --s2-shadow-c2: rgba(218,165,32,0.3);
+                --s2-shadow-c3: rgba(184,134,11,0.15);
+
+                --s3-grad-c1: rgba(255,140,0,0.8);    /* DarkOrange */
+                --s3-grad-c2: rgba(255,40,0,0.6);     /* Red-Orange */
+                --s3-grad-c3: rgba(139,0,0,0.3);      /* DarkRed */
+                --s3-shadow-c1: rgba(255,140,0,0.6);
+                --s3-shadow-c2: rgba(255,40,0,0.4);
+                --s3-shadow-c3: rgba(139,0,0,0.2);
+
+                --s4-grad-c1: rgba(240,128,128,0.7);  /* LightCoral */
+                --s4-grad-c2: rgba(205,92,92,0.5);    /* IndianRed */
+                --s4-grad-c3: rgba(165,42,42,0.3);    /* Brown */
+                --s4-shadow-c1: rgba(240,128,128,0.5);
+                --s4-shadow-c2: rgba(205,92,92,0.3);
+                --s4-shadow-c3: rgba(165,42,42,0.15);
+
+                --s5-grad-c1: rgba(255,105,180,0.8);  /* HotPink */
+                --s5-grad-c2: rgba(219,112,147,0.6);  /* PaleVioletRed */
+                --s5-grad-c3: rgba(199,21,133,0.4);   /* MediumVioletRed */
+                --s5-shadow-c1: rgba(255,105,180,0.6);
+                --s5-shadow-c2: rgba(219,112,147,0.4);
+                --s5-shadow-c3: rgba(199,21,133,0.2);
+
+                --s6-grad-c1: rgba(255,165,0,0.8);    /* Orange */
+                --s6-grad-c2: rgba(255,99,71,0.6);    /* Tomato */
+                --s6-grad-c3: rgba(255,0,0,0.3);      /* Red */
+                --s6-shadow-c1: rgba(255,165,0,0.6);
+                --s6-shadow-c2: rgba(255,99,71,0.4);
+                --s6-shadow-c3: rgba(255,0,0,0.2);
+            }
+        }
+        /* --- КІНЕЦЬ: Нова анімація --- */
+
+        /* Декоративні елементи на фоні */
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: floatShape 20s infinite ease-in-out, lightPulse 8s ease-in-out infinite alternate;
+        }
+
+        /* --- ПОЧАТОК: Оновлення стилів фігур для використання CSS-змінних --- */
+        .shape:nth-child(1) {
+            background: radial-gradient(circle at center, var(--s1-grad-c1) 0%, var(--s1-grad-c2) 30%, var(--s1-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 50px var(--s1-shadow-c1),
+                0 0 100px var(--s1-shadow-c2),
+                0 0 150px var(--s1-shadow-c3);
+            width: 150px; height: 150px; top: 15%; left: 8%; animation-delay: 0s;
+        }
+        .shape:nth-child(2) {
+            background: radial-gradient(circle at center, var(--s2-grad-c1) 0%, var(--s2-grad-c2) 30%, var(--s2-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 60px var(--s2-shadow-c1),
+                0 0 120px var(--s2-shadow-c2),
+                0 0 180px var(--s2-shadow-c3);
+            width: 200px; height: 200px; top: 55%; right: 12%; animation-delay: -3s;
+        }
+        .shape:nth-child(3) {
+            background: radial-gradient(circle at center, var(--s3-grad-c1) 0%, var(--s3-grad-c2) 30%, var(--s3-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 45px var(--s3-shadow-c1),
+                0 0 90px var(--s3-shadow-c2),
+                0 0 135px var(--s3-shadow-c3);
+            width: 120px; height: 120px; bottom: 25%; left: 18%; animation-delay: -6s;
+        }
+        .shape:nth-child(4) {
+            background: radial-gradient(circle at center, var(--s4-grad-c1) 0%, var(--s4-grad-c2) 30%, var(--s4-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 55px var(--s4-shadow-c1),
+                0 0 110px var(--s4-shadow-c2),
+                0 0 165px var(--s4-shadow-c3);
+            width: 170px; height: 170px; top: 8%; right: 25%; animation-delay: -9s;
+        }
+        .shape:nth-child(5) {
+            background: radial-gradient(circle at center, var(--s5-grad-c1) 0%, var(--s5-grad-c2) 30%, var(--s5-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 70px var(--s5-shadow-c1),
+                0 0 140px var(--s5-shadow-c2),
+                0 0 210px var(--s5-shadow-c3);
+            width: 180px; height: 180px; top: 35%; left: 20%; animation-delay: -1s;
+        }
+        .shape:nth-child(6) {
+            background: radial-gradient(circle at center, var(--s6-grad-c1) 0%, var(--s6-grad-c2) 30%, var(--s6-grad-c3) 60%, transparent 100%);
+            box-shadow:
+                0 0 40px var(--s6-shadow-c1),
+                0 0 80px var(--s6-shadow-c2),
+                0 0 120px var(--s6-shadow-c3);
+            width: 110px; height: 110px; bottom: 35%; right: 35%; animation-delay: -7s;
+        }
+        /* --- КІНЕЦЬ: Оновлення стилів фігур --- */
+
+        /* Анімація неонового світіння (lightPulse) */
+        @keyframes lightPulse {
+            0% { opacity: 0.7; transform: scale(1); filter: blur(20px) brightness(1); }
+            50% { opacity: 1; transform: scale(1.05); filter: blur(25px) brightness(1.2); }
+            100% { opacity: 0.8; transform: scale(0.98); filter: blur(22px) brightness(1.1); }
+        }
+
+        /* Анімація плавання декоративних елементів */
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) translateX(10px) rotate(90deg); }
+            50% { transform: translateY(-30px) translateX(-5px) rotate(180deg); }
+            75% { transform: translateY(-10px) translateX(-15px) rotate(270deg); }
+        }
+
+        /* Контейнер для 3D-перспективи */
+        .card-container {
+            width: 80vw;
+            max-width: 600px;
+            height: 50vw;
+            max-height: 380px;
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+        }
+
+        /* Основний елемент візитівки, який обертається */
+        .card-flipper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px) brightness(1.3) contrast(1.4) saturate(1.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 60px 0 rgba(0, 0, 0, 0.7), 0 0 40px 0 rgba(64,224,208,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            will-change: transform;
+            animation: float 4s ease-in-out infinite alternate;
+        }
+
+        /* Анімація "паріння" для картки */
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg) rotateY(2deg) rotateZ(1deg); }
+            100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+        }
+
+        /* Сторони візитівки */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Ховаємо зворотню сторону, коли вона не видима */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            background: transparent;
+        }
+
+        /* Орієнтація зворотної сторони */
+        .card-back {
+            transform: rotateY(180deg); /* Для горизонтального перевороту */
+        }
+
+        /* Стилі для пульсуючого тексту */
+        .pulse-text {
+            color: #f0f8ff;
+            text-shadow: 0 0 8px rgba(64,224,208,0.3), 0 0 15px rgba(138,43,226,0.2);
+            animation: pulse-animation 2s ease-in-out infinite alternate;
+        }
+
+        /* Анімація пульсації тексту */
+        @keyframes pulse-animation {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+
+        /* Оновлення кольорів тексту для читабельності на більш прозорому фоні */
+        .front-content h2, .front-content p,
+        .back-content h2, .back-content table th, .back-content table td, .back-content p {
+            color: #f0f8ff;
+        }
+        .back-content a {
+            color: #40e0d0;
+            text-shadow: 0 0 5px rgba(64,224,208,0.5);
+        }
+
+        /* Стилі для контенту лицьової сторони */
+        .front-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .front-content h2 {
+            font-size: clamp(1rem, 2.5vw, 1.8rem);
+            margin-top: 0;
+            font-weight: 400;
+        }
+        .front-content p {
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            margin: 5px 0;
+        }
+
+        /* Стилі для контенту зворотної сторони */
+        .back-content {
+            /* Додаємо transition для плавного переходу scaleY */
+            transition: transform 0.2s ease-out;
+        }
+        .back-content h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .back-content table {
+            width: 90%;
+            max-width: 350px;
+            margin-top: 10px;
+            border-collapse: collapse;
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+        }
+        .back-content th, .back-content td {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .back-content th {
+            font-weight: 600;
+        }
+        .back-content tr:last-child td {
+            border-bottom: none;
+        }
+        .back-content p {
+             font-size: clamp(0.8rem, 2vw, 1.2rem);
+             margin-top: 20px;
+        }
+        .back-content a {
+            text-decoration: none;
+        }
+
+        /* Стилі для підказки */
+        .hint-text {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #f0f8ff;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0.8;
+            animation: pulse-animation 2.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 8px rgba(64,224,208,0.2);
+            line-height: 1.4;
+        }
+
+        /* Медіа-запити для адаптивності на мобільних пристроях */
+        @media (max-width: 768px) {
+            .card-container {
+                width: 90vw;
+                height: 60vw;
+                margin-bottom: 20px;
+            }
+            .front-content h1 {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+            .front-content h2 {
+                font-size: clamp(0.9rem, 2.8vw, 1.5rem);
+            }
+            .front-content p {
+                font-size: clamp(0.75rem, 1.8vw, 1.1rem);
+            }
+            .back-content h2 {
+                font-size: clamp(1.5rem, 5vw, 2.5rem);
+            }
+            .back-content table {
+                width: 95%;
+            }
+            .back-content th, .back-content td {
+                font-size: clamp(0.75rem, 1.8vw, 1rem);
+                padding: 6px 0;
+            }
+            .hint-text {
+                font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="card-container">
+        <div class="card-flipper" id="cardFlipper">
+            <!-- Лицьова сторона візитівки -->
+            <div class="card-front">
+                <div class="front-content">
+                    <h1 class="pulse-text">TECHNOSWELT</h1>
+                    <h2 class="pulse-text">Ihr Portal in die Welt der Innovationen</h2>
+                    <p class="pulse-text">Beste Gadgets, Komponenten & Service</p>
+                    <p class="pulse-text">Technologiestraße 10, 10115 Berlin</p>
+                    <p class="pulse-text">Mo-Fr: 9:00 - 19:00 Uhr</p>
+                </div>
+            </div>
+
+            <!-- Зворотна сторона візитівки -->
+            <div class="card-back">
+                <div class="back-content" id="backContent"> <!-- Додали ID для легкого доступу з JS -->
+                    <h2 class="pulse-text">ÖFFNUNGSZEITEN</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="pulse-text">Tag</th>
+                                <th class="pulse-text">Zeit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pulse-text">Montag - Freitag</td>
+                                <td class="pulse-text">9:00 - 19:00 Uhr</td>
+                            </tr>
+                            <tr>
+                                <td class="pulse-text">Samstag</td>
+                                <td class="pulse-text">10:00 - 17:00 Uhr</td>
+                            </tr>
+                            <tr>
+                                <td class="pulse-text">Sonntag</td>
+                                <td class="pulse-text">Geschlossen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="pulse-text">Besuchen Sie unsere Website: <a href="#" style="color: #40e0d0; text-decoration: none;">www.technoswelt.de</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hint-text pulse-text">
+        Ziehen Sie die Karte, um sie in 3D zu drehen!<br>
+        Nach 5 Sekunden Inaktivität kehrt sie in ihre Ausgangsposition zurück.
+    </div>
+
+    <script>
+        const cardFlipper = document.getElementById('cardFlipper');
+        const backContent = document.getElementById('backContent'); // Отримуємо елемент вмісту зворотної сторони
+        let isDragging = false;
+        let startX, startY;
+        let currentRotateX = 0;
+        let currentRotateY = 0;
+        const rotationSpeed = 0.5;
+
+        let inactivityTimeout;
+        const inactivityDuration = 5000;
+
+        // Функція для оновлення CSS-трансформації картки
+        function updateCardTransform() {
+            cardFlipper.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+
+            // Обробка "інверсії" тексту для вертикального перевороту
+            // Нормалізуємо кут X до діапазону 0-360 градусів
+            let normalizedRotateX = (currentRotateX % 360 + 360) % 360;
+
+            // Якщо картка перевернута вертикально (між 90 і 270 градусами по X),
+            // застосовуємо scaleY(-1) до вмісту зворотньої сторони, щоб він здавався "прямим"
+            // (або інвертованим відносно вертикальної осі)
+            if (normalizedRotateX > 90 && normalizedRotateX < 270) {
+                backContent.style.transform = 'scaleY(-1)';
+            } else {
+                backContent.style.transform = 'none'; // Скидаємо трансформацію, якщо не потрібно
+            }
+        }
+
+        // Запуск таймера бездіяльності, який повертає картку у вихідне положення
+        function startInactivityTimer() {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(() => {
+                if (!isDragging) {
+                    cardFlipper.style.transition = 'transform 0.5s ease-out';
+                    currentRotateX = 0;
+                    currentRotateY = 0;
+                    updateCardTransform(); // Оновлюємо трансформацію для повернення в 0
+
+                    const onTransitionEnd = () => {
+                        cardFlipper.removeEventListener('transitionend', onTransitionEnd);
+                        cardFlipper.style.animation = 'float 4s ease-in-out infinite alternate';
+                        cardFlipper.style.transition = 'transform 0.1s linear';
+                        // Переконаємося, що текст зворотної сторони повертається в нормальний стан
+                        backContent.style.transform = 'none';
+                    };
+                    cardFlipper.addEventListener('transitionend', onTransitionEnd);
+                }
+            }, inactivityDuration);
+        }
+
+        // Скидання таймера бездіяльності та тимчасове відключення анімації "паріння"
+        function resetInactivity() {
+            clearTimeout(inactivityTimeout);
+            cardFlipper.style.animation = 'none';
+            cardFlipper.style.transition = 'none'; // Відключаємо плавність під час перетягування
+        }
+
+        // Обробник початку перетягування мишею
+        cardFlipper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            resetInactivity();
+        });
+
+        // Обробник руху миші під час перетягування
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            currentRotateY += deltaX * rotationSpeed;
+            currentRotateX -= deltaY * rotationSpeed;
+            // !!! Більше НЕ ОБМЕЖУЄМО currentRotateX, щоб дозволити повний вертикальний оборот !!!
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            updateCardTransform(); // Оновлюємо вигляд картки
+        });
+
+        // Обробник закінчення перетягування мишею
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                cardFlipper.style.transition = 'transform 0.1s linear'; // Повертаємо плавність
+                startInactivityTimer(); // Запускаємо таймер бездіяльності
+            }
+        });
+
+        // Обробники для сенсорних пристроїв (touch events)
+        cardFlipper.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            resetInactivity();
+        }, { passive: false });
+
+        cardFlipper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); // Запобігаємо прокручуванню сторінки під час перетягування
+
+            const deltaX = e.touches[0].clientX - startX;
+            const deltaY = e.touches[0].clientY - startY;
+
+            currentRotateY += deltaX * rotationSpeed;
+            currentRotateX -= deltaY * rotationSpeed;
+            // !!! Більше НЕ ОБМЕЖУЄМО currentRotateX !!!
+
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+
+            updateCardTransform(); // Оновлюємо вигляд картки
+        }, { passive: false });
+
+        cardFlipper.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                cardFlipper.style.transition = 'transform 0.1s linear';
+                startInactivityTimer();
+            }
+        });
+
+        cardFlipper.addEventListener('touchcancel', () => {
+            if (isDragging) {
+                isDragging = false;
+                cardFlipper.style.transition = 'transform 0.1s linear';
+                startInactivityTimer();
+            }
+        });
+
+        // Початкова ініціалізація при завантаженні сторінки
+        window.addEventListener('load', () => {
+            // Встановлюємо початкові кути та оновлюємо трансформацію
+            currentRotateY = 0;
+            currentRotateX = 0;
+            updateCardTransform();
+            startInactivityTimer(); // Запускаємо таймер бездіяльності одразу
+        });
+    </script>
+</body>
+</html>
